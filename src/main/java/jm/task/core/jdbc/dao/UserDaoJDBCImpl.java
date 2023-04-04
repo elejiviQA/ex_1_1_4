@@ -34,11 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            try {
-                connection.rollback(); //rollback for DDL?
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
+            // try { connection.rollback(); } catch (SQLException ex) { throw new RuntimeException(ex); } //rollback for DDL?
             throw new RuntimeException(e);
         } finally {
             try {
@@ -66,11 +62,7 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            try {
-                connection.rollback(); //rollback for DDL?
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
+            // try { connection.rollback(); } catch (SQLException ex) { throw new RuntimeException(ex); } //rollback for DDL?
             throw new RuntimeException(e);
         } finally {
             try {
