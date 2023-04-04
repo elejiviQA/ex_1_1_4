@@ -35,7 +35,6 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.setAutoCommit(true);
         } catch (SQLException e) {
             try {
-                System.out.println("Rollback");
                 connection.rollback();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
