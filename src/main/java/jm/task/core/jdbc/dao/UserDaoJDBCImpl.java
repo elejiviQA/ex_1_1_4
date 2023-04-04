@@ -29,12 +29,13 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             connection = Util.get();
             connection.setAutoCommit(false);
-            var prepareStatement = connection.prepareStatement(createUsersTable);
-            prepareStatement.executeUpdate();
+            var statement = connection.createStatement();
+            statement.executeUpdate(createUsersTable);
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
             try {
+                System.out.println("Rollback");
                 connection.rollback();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -61,8 +62,8 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             connection = Util.get();
             connection.setAutoCommit(false);
-            var prepareStatement = connection.prepareStatement(dropUsersTable);
-            prepareStatement.executeUpdate();
+            var statement = connection.createStatement();
+            statement.executeUpdate(dropUsersTable);
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
@@ -92,8 +93,8 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             connection = Util.get();
             connection.setAutoCommit(false);
-            var prepareStatement = connection.prepareStatement(saveUser);
-            prepareStatement.executeUpdate();
+            var statement = connection.createStatement();
+            statement.executeUpdate(saveUser);
             connection.commit();
             connection.setAutoCommit(true);
             System.out.println(result);
@@ -123,8 +124,8 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             connection = Util.get();
             connection.setAutoCommit(false);
-            var prepareStatement = connection.prepareStatement(removeUserById);
-            prepareStatement.executeUpdate();
+            var statement = connection.createStatement();
+            statement.executeUpdate(removeUserById);
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
@@ -154,8 +155,8 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             connection = Util.get();
             connection.setAutoCommit(false);
-            var prepareStatement = connection.prepareStatement(getAllUsers);
-            var resultExecute = prepareStatement.executeQuery();
+            var statement = connection.createStatement();
+            var resultExecute = statement.executeQuery(getAllUsers);
             while (resultExecute.next()) {
                 User user = new User();
                 user.setId(resultExecute.getLong("id"));
@@ -195,8 +196,8 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             connection = Util.get();
             connection.setAutoCommit(false);
-            var prepareStatement = connection.prepareStatement(cleanUsersTable);
-            prepareStatement.executeUpdate();
+            var statement = connection.createStatement();
+            statement.executeUpdate(cleanUsersTable);
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
